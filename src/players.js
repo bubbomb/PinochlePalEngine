@@ -31,3 +31,24 @@ export const RemovePlayerById = (id) => {
 export const GetPlayerById = (id) => {
   return store.players.find((player) => player.id === id)
 }
+
+export const UpdatePlayer = (id, update) => {
+  if (update.id !== undefined && update.id !== id) {
+    throw new Error('Cannot change player id')
+  }
+
+  let names = new Set()
+
+  let newPlayers = store.players.map((player) => {
+    if (player.id === id) {
+      return { ...player, ...update }
+    }
+    names.add(player.name)
+    return player
+  })
+
+  if (update.name !== undefined && names.has(update.name)) {
+    throw new Error('A player with this name already exists')
+  }
+  store.players = newPlayers
+}

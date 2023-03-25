@@ -3,7 +3,8 @@ import {
   GetPlayerById,
   GetPlayers,
   RemovePlayerById,
-  SetPlayers
+  SetPlayers,
+  UpdatePlayer
 } from './players.js'
 import { store } from './store.js'
 
@@ -14,6 +15,7 @@ export const App = (players = []) => {
     SetPlayers,
     AddPlayer,
     RemovePlayerById,
-    GetPlayerById
+    GetPlayerById,
+    UpdatePlayer
   }
 }

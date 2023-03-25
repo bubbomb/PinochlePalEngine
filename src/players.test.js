@@ -147,4 +147,39 @@ describe('player tests', () => {
     let playerRetrieved = pinochlePal.GetPlayerById(0)
     expect(playerRetrieved).toEqual(undefined)
   })
+
+  test('update player', () => {
+    const players = [carol, derek]
+    const pinochlePal = App(players)
+
+    const update = { name: 'Carol D.', foo: 'bar' }
+    pinochlePal.UpdatePlayer(carol.id, update)
+    const newCarol = pinochlePal.GetPlayerById(carol.id)
+
+    const expectedNewCarol = {
+      ...carol,
+      ...update
+    }
+    expect(newCarol).toEqual(expectedNewCarol)
+  })
+
+  test('update player id throws error', () => {
+    const players = [carol, derek]
+    const pinochlePal = App(players)
+
+    const update = { id: 0, name: 'Carol D.', foo: 'bar' }
+    expect(() => {
+      pinochlePal.UpdatePlayer(carol.id, update)
+    }).toThrow()
+  })
+
+  test('update player, name must be unique', () => {
+    const players = [carol, derek]
+    const pinochlePal = App(players)
+
+    const update = { name: 'Derek' }
+    expect(() => {
+      pinochlePal.UpdatePlayer(carol.id, update)
+    }).toThrow()
+  })
 })
