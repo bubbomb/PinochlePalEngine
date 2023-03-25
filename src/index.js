@@ -8,10 +8,18 @@ export const App = (players = []) => {
   const AddPlayer = (newPlayer) => {
     players.push(newPlayer)
   }
+  const RemovePlayerById = (id) => {
+    players = players.filter(player => player.id !== id)
+  }
+  const GetPlayerById = (id) => {
+    return players.find(player => player.id === id)
+  }
 
   return {
     GetPlayers,
     SetPlayers,
-    AddPlayer
+    AddPlayer,
+    RemovePlayerById,
+    GetPlayerById
   }
 }
