@@ -6,6 +6,14 @@ export const App = (players = []) => {
     players = newPlayers
   }
   const AddPlayer = (newPlayer) => {
+    if (newPlayer.id === undefined) { throw new Error('id is missing') }
+    if (newPlayer.name === undefined) { throw new Error('name is missing') }
+    if (players.find(player => player.id === newPlayer.id)) {
+      throw new Error('a player with this id already exists')
+    }
+    if (players.find(player => player.name === newPlayer.name)) {
+      throw new Error('a player with this name already exists')
+    }
     players.push(newPlayer)
   }
   const RemovePlayerById = (id) => {

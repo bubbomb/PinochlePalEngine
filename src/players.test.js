@@ -60,6 +60,62 @@ describe('player tests', () => {
     expect(playersToCheck).toEqual(expect.arrayContaining(expectedPlayers))
   })
 
+  test('add player without id', () => {
+    const pinochlePal = App()
+    let noIdPlayer = {
+      name: 'No Idea'
+    }
+    expect(() => {
+      pinochlePal.AddPlayer(noIdPlayer)
+    }
+    ).toThrow()
+    const playersToCheck = pinochlePal.GetPlayers()
+    expect(playersToCheck).toHaveLength(0)
+  })
+
+  test('add player without name', () => {
+    const pinochlePal = App()
+    let noIdPlayer = {
+      id: 0
+    }
+    expect(() => {
+      pinochlePal.AddPlayer(noIdPlayer)
+    }
+    ).toThrow()
+    const playersToCheck = pinochlePal.GetPlayers()
+    expect(playersToCheck).toHaveLength(0)
+  })
+
+  test('add player with id already used', () => {
+    const players = [carol]
+    const pinochlePal = App(players)
+    let playerWithSameId = {
+      id: 1,
+      name: 'Kristi'
+    }
+    expect(() => {
+      pinochlePal.AddPlayer(playerWithSameId)
+    }
+    ).toThrow()
+    const playersToCheck = pinochlePal.GetPlayers()
+    expect(playersToCheck).toHaveLength(1)
+  })
+
+  test('add player with name already used', () => {
+    const players = [carol]
+    const pinochlePal = App(players)
+    let playerWithSameId = {
+      id: 2,
+      name: 'Carol'
+    }
+    expect(() => {
+      pinochlePal.AddPlayer(playerWithSameId)
+    }
+    ).toThrow()
+    const playersToCheck = pinochlePal.GetPlayers()
+    expect(playersToCheck).toHaveLength(1)
+  })
+
   test('remove player by id', () => {
     const players = [carol, derek]
     const pinochlePal = App(players)
@@ -87,6 +143,7 @@ describe('player tests', () => {
     let playerRetrieved = pinochlePal.GetPlayerById(derek.id)
     expect(playerRetrieved).toEqual(derek)
   })
+
   test('get player by id, but id doesnt exist', () => {
     const players = [carol, derek]
     const pinochlePal = App(players)
