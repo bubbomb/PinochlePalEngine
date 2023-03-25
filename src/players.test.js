@@ -67,8 +67,7 @@ describe('player tests', () => {
     }
     expect(() => {
       pinochlePal.AddPlayer(noIdPlayer)
-    }
-    ).toThrow()
+    }).toThrow()
     const playersToCheck = pinochlePal.GetPlayers()
     expect(playersToCheck).toHaveLength(0)
   })
@@ -80,8 +79,7 @@ describe('player tests', () => {
     }
     expect(() => {
       pinochlePal.AddPlayer(noIdPlayer)
-    }
-    ).toThrow()
+    }).toThrow()
     const playersToCheck = pinochlePal.GetPlayers()
     expect(playersToCheck).toHaveLength(0)
   })
@@ -95,8 +93,7 @@ describe('player tests', () => {
     }
     expect(() => {
       pinochlePal.AddPlayer(playerWithSameId)
-    }
-    ).toThrow()
+    }).toThrow()
     const playersToCheck = pinochlePal.GetPlayers()
     expect(playersToCheck).toHaveLength(1)
   })
@@ -110,8 +107,7 @@ describe('player tests', () => {
     }
     expect(() => {
       pinochlePal.AddPlayer(playerWithSameId)
-    }
-    ).toThrow()
+    }).toThrow()
     const playersToCheck = pinochlePal.GetPlayers()
     expect(playersToCheck).toHaveLength(1)
   })
