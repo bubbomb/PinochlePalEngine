@@ -1,3 +1,9 @@
 export let store = {
-  players: []
+  players: [],
+  currentGame: {
+    teams: [],
+    rounds: [],
+    settings: {}
+  },
+  globalSettings: {}
 }
