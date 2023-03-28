@@ -6,7 +6,7 @@ import {
   SetPlayers,
   UpdatePlayer
 } from './players.js'
-import { GetTeams } from './teams.js'
+import { GetTeamIdFromPlayerId, GetTeams } from './teams.js'
 import { store } from './store.js'
 
 export const App = (
@@ -22,6 +22,7 @@ export const App = (
     RemovePlayerById,
     GetPlayerById,
     UpdatePlayer,
-    GetTeams
+    GetTeams,
+    GetTeamIdFromPlayerId
   }
 }

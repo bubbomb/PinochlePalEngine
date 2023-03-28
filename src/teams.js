@@ -8,3 +8,13 @@ export const GetTeams = () => {
   })
   return teams
 }
+
+export const GetTeamIdFromPlayerId = (playerId) => {
+  let teamId
+  store.currentGame.teams.forEach((team) => {
+    if (team.members.find((id) => id === playerId)) {
+      teamId = team.id
+    }
+  })
+  return teamId
+}
