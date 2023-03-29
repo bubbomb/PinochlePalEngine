@@ -46,8 +46,8 @@ describe('team function tests', () => {
   test('get team for player', () => {
     const pinochlePal = App(players, currentGame)
     const teamId1 = pinochlePal.GetTeamIdFromPlayerId(2)
+    expect(teamId1).toBe(1)
     const teamId2 = pinochlePal.GetTeamIdFromPlayerId(3)
     expect(teamId2).toBe(2)
-    expect(teamId1).toBe(1)
   })
 })

@@ -1,4 +1,5 @@
 import { store } from './store.js'
+import { v4 as uuidv4 } from 'uuid'
 
 export const GetPlayers = () => {
   return store.players
@@ -51,4 +52,14 @@ export const UpdatePlayer = (id, update) => {
     throw new Error('A player with this name already exists')
   }
   store.players = newPlayers
+}
+
+export const CreateNewPlayer = (name, options = {}) => {
+  let newPlayer = {
+    id: uuidv4(),
+    name,
+    ...options
+  }
+  AddPlayer(newPlayer)
+  return newPlayer.id
 }

@@ -2,17 +2,17 @@ import { App } from './index.js'
 
 describe('player tests', () => {
   let carol = {
-    id: 1,
+    id: '33a5d901-fc34-4868-a122-d17ddd9c858f',
     name: 'Carol'
   }
 
   let derek = {
-    id: 2,
+    id: '2f032bbf-6e5b-46ba-a04d-7b0ea731e975',
     name: 'Derek'
   }
 
   let spencer = {
-    id: 3,
+    id: 'f0d529b6-b9bc-4ef6-b8e1-7d89428c0b06',
     name: 'Spencer'
   }
 
@@ -88,7 +88,7 @@ describe('player tests', () => {
     const players = [carol]
     const pinochlePal = App(players)
     let playerWithSameId = {
-      id: 1,
+      id: carol.id,
       name: 'Kristi'
     }
     expect(() => {
@@ -102,7 +102,7 @@ describe('player tests', () => {
     const players = [carol]
     const pinochlePal = App(players)
     let playerWithSameId = {
-      id: 2,
+      id: carol.id,
       name: 'Carol'
     }
     expect(() => {
@@ -181,5 +181,33 @@ describe('player tests', () => {
     expect(() => {
       pinochlePal.UpdatePlayer(carol.id, update)
     }).toThrow()
+  })
+
+  test('create new player', () => {
+    const players = [carol, derek]
+    const pinochlePal = App(players)
+    const newId = pinochlePal.CreateNewPlayer('Lena')
+    expect(newId).toBeTruthy()
+
+    let newPlayers = pinochlePal.GetPlayers()
+    expect(newPlayers).toHaveLength(3)
+
+    const playerIds = newPlayers.map((player) => player.id)
+    const uniqueIds = new Set(playerIds)
+
+    expect(playerIds).toHaveLength(uniqueIds.size)
+  })
+
+  test('create new player with options', () => {
+    const players = [carol, derek]
+    const pinochlePal = App(players)
+    const newId = pinochlePal.CreateNewPlayer('Lena', { foo: 1, bar: '2' })
+
+    let newPlayers = pinochlePal.GetPlayers()
+    expect(newPlayers).toHaveLength(3)
+    const lena = pinochlePal.GetPlayerById(newId)
+    expect(lena.name).toEqual('Lena')
+    expect(lena.foo).toBe(1)
+    expect(lena.bar).toBe('2')
   })
 })

@@ -1,5 +1,6 @@
 import {
   AddPlayer,
+  CreateNewPlayer,
   GetPlayerById,
   GetPlayers,
   RemovePlayerById,
@@ -22,6 +23,7 @@ export const App = (
     RemovePlayerById,
     GetPlayerById,
     UpdatePlayer,
+    CreateNewPlayer,
     GetTeams,
     GetTeamIdFromPlayerId
   }
