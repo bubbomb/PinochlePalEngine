@@ -1,25 +1,24 @@
-export const allPlayers = [
+export const AllPlayers = [
   { id: '1playerid', name: 'Carol' },
   { id: '2playerid', name: 'Derek' },
   { id: '3playerid', name: 'Spencer' },
   { id: '4playerid', name: 'Kristi' }
 ]
 
-const team1 = {
+export const Team1 = {
   id: '1teamid',
   name: 'team1',
   members: ['1playerid', '2playerid']
 }
 
-const team2 = {
+export const Team2 = {
   id: '2teamid',
   name: 'team2',
   members: ['3playerid', '4playerid']
 }
 
-export const fourPlayerTeams = [team1, team2]
+export const FourPlayerTeams = [Team1, Team2]
 export const fourPlayerSettings = { playerCount: 4 }
-export const fourPlayerGlobalSettings = { playerCount: 4 }
 
 const fourPlayerRound1 = {
   bid: {
@@ -61,11 +60,13 @@ const fourPlayerRound2 = {
   }
 }
 
+export const FourPlayerRounds = [fourPlayerRound1, fourPlayerRound2]
+
 export const fourPlayerStartedGame = {
-  players: allPlayers,
+  players: AllPlayers,
   currentGame: {
-    teams: fourPlayerTeams,
-    rounds: [fourPlayerRound1, fourPlayerRound2],
+    teams: FourPlayerTeams,
+    rounds: FourPlayerRounds,
     settings: fourPlayerSettings
   }
 }

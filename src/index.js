@@ -1,4 +1,12 @@
 import {
+  AddBidToCurrentRound,
+  AddMeldToCurrentRound,
+  AddTrickToCurrentRound,
+  GetCurrentRound,
+  GetRounds,
+  StartNewRound
+} from './rounds.js'
+import {
   AddPlayer,
   CreateNewPlayer,
   GetPlayerById,
@@ -25,6 +33,12 @@ export const App = (
     UpdatePlayer,
     CreateNewPlayer,
     GetTeams,
-    GetTeamIdFromPlayerId
+    GetTeamIdFromPlayerId,
+    AddBidToCurrentRound,
+    GetRounds,
+    StartNewRound,
+    GetCurrentRound,
+    AddMeldToCurrentRound,
+    AddTrickToCurrentRound
   }
 }
