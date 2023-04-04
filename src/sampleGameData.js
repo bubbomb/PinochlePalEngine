@@ -10,38 +10,38 @@ export const AllPlayers = [
   { ...Player4 }
 ]
 
-export const Team1 = {
+export const FourPlayerTeam1 = {
   id: '1teamid',
   name: 'team1',
   members: [Player1.id, Player2.id]
 }
 
-export const Team2 = {
+export const FourPlayerTeam2 = {
   id: '2teamid',
   name: 'team2',
   members: [Player3.id, Player4.id]
 }
 
-export const FourPlayerTeams = [Team1, Team2]
+export const FourPlayerTeams = [FourPlayerTeam1, FourPlayerTeam2]
 export const fourPlayerSettings = { playerCount: 4 }
 
 const fourPlayerRound1 = {
   bid: {
     amount: 300,
     player: Player1.id,
-    team: Team1.id
+    team: FourPlayerTeam1.id
   },
   melds: {
-    [Team1.id]: 200,
-    [Team2.id]: 60
+    [FourPlayerTeam1.id]: 200,
+    [FourPlayerTeam2.id]: 60
   },
   tricks: {
-    [Team1.id]: 210,
-    [Team2.id]: 40
+    [FourPlayerTeam1.id]: 210,
+    [FourPlayerTeam2.id]: 40
   },
   calculatedTotal: {
-    [Team1.id]: 410,
-    [Team2.id]: 100
+    [FourPlayerTeam1.id]: 410,
+    [FourPlayerTeam2.id]: 100
   }
 }
 
@@ -49,19 +49,19 @@ const fourPlayerRound2 = {
   bid: {
     amount: 310,
     player: Player3.id,
-    team: Team2.id
+    team: FourPlayerTeam2.id
   },
   melds: {
-    [Team1.id]: 100,
-    [Team2.id]: 120
+    [FourPlayerTeam1.id]: 100,
+    [FourPlayerTeam2.id]: 120
   },
   tricks: {
-    [Team1.id]: 80,
-    [Team2.id]: 170
+    [FourPlayerTeam1.id]: 80,
+    [FourPlayerTeam2.id]: 170
   },
   calculatedTotal: {
-    [Team1.id]: 180,
-    [Team2.id]: -310
+    [FourPlayerTeam1.id]: 180,
+    [FourPlayerTeam2.id]: -310
   }
 }
 
