@@ -3,6 +3,8 @@ import {
   FourPlayerRounds,
   FourPlayerStartedGame,
   FourPlayerTeams,
+  Player1,
+  Player3,
   Team1,
   Team2
 } from './sampleGameData'
@@ -120,6 +122,87 @@ describe('round function tests', () => {
 
     expect(pinochlePal.GetRounds()).toEqual([expectedRound])
   })
+
+  describe('calculate total', () => {
+    const round = {
+      bid: {
+        amount: 250,
+        player: Player1.id,
+        team: Team1.id
+      },
+      melds: {
+        [Team1.id]: 200,
+        [Team2.id]: 100
+      },
+      tricks: {
+        [Team1.id]: 170,
+        [Team2.id]: 80
+      },
+      calculatedTotal: {}
+    }
+
+    test('round exceeded bid', () => {
+      const pinochlePal = App([...AllPlayers], {
+        teams: FourPlayerTeams,
+        rounds: [{ ...round }]
+      })
+      pinochlePal.CalculateCurrentRoundTotal()
+
+      const expectedTotal = {
+        [Team1.id]: 370,
+        [Team2.id]: 180
+      }
+      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
+        expectedTotal
+      )
+    })
+
+    test('round missed bid', () => {
+      const pinochlePal = App([...AllPlayers], {
+        teams: FourPlayerTeams,
+        rounds: [
+          {
+            ...round,
+            bid: {
+              amount: 250,
+              player: Player3.id,
+              team: Team2.id
+            }
+          }
+        ]
+      })
+      pinochlePal.CalculateCurrentRoundTotal()
+      const expectedTotal = {
+        [Team1.id]: 370,
+        [Team2.id]: -250
+      }
+      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
+        expectedTotal
+      )
+    })
+    test('round no tricks', () => {
+      const pinochlePal = App([...AllPlayers], {
+        teams: FourPlayerTeams,
+        rounds: [
+          {
+            ...round,
+            tricks: {
+              [Team1.id]: 170,
+              [Team2.id]: 0
+            }
+          }
+        ]
+      })
+      pinochlePal.CalculateCurrentRoundTotal()
+      const expectedTotal = {
+        [Team1.id]: 370,
+        [Team2.id]: 0
+      }
+      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
+        expectedTotal
+      )
+    })
+  })
 })
 
 describe('test multi-function round flow', () => {
@@ -138,7 +221,7 @@ describe('test multi-function round flow', () => {
     expect(pinochlePal.GetCurrentRound()).toEqual(expectedNewRound)
     expect(pinochlePal.GetRounds()).toHaveLength(3)
 
-    pinochlePal.AddBidToCurrentRound(AllPlayers[0].id, 250)
+    pinochlePal.AddBidToCurrentRound(Player1.id, 250)
     pinochlePal.AddMeldToCurrentRound(Team1.id, 200)
     pinochlePal.AddMeldToCurrentRound(Team2.id, 100)
     pinochlePal.AddTrickToCurrentRound(Team1.id, 170)
@@ -146,7 +229,7 @@ describe('test multi-function round flow', () => {
     const expectedFinishedRound = {
       bid: {
         amount: 250,
-        player: AllPlayers[0].id,
+        player: Player1.id,
         team: Team1.id
       },
       melds: {

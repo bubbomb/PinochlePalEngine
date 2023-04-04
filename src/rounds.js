@@ -6,6 +6,9 @@ export const GetRounds = () => {
 }
 
 export const GetCurrentRound = () => {
+  if (!('rounds' in store.currentGame)) {
+    store.currentGame.rounds = []
+  }
   return store.currentGame.rounds[store.currentGame.rounds.length - 1]
 }
 
@@ -58,6 +61,28 @@ export const AddTrickToCurrentRound = (teamId, amount) => {
       currentRound.tricks[team.id] = amount
     } else {
       currentRound.tricks[team.id] = 250 - amount
+    }
+  })
+}
+
+export const CalculateCurrentRoundTotal = () => {
+  let currentRound = GetCurrentRound()
+  const teams = GetTeams()
+  const bidTeam = currentRound.bid.team
+  const bidAmount = currentRound.bid.amount
+
+  teams.forEach((team) => {
+    let melds = currentRound.melds[team.id]
+    let tricks = currentRound.tricks[team.id]
+
+    let total = melds + tricks
+
+    if (bidTeam === team.id && total < bidAmount) {
+      currentRound.calculatedTotal[team.id] = bidAmount * -1
+    } else if (tricks === 0) {
+      currentRound.calculatedTotal[team.id] = 0
+    } else {
+      currentRound.calculatedTotal[team.id] = total
     }
   })
 }

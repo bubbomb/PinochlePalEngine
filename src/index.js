@@ -2,6 +2,7 @@ import {
   AddBidToCurrentRound,
   AddMeldToCurrentRound,
   AddTrickToCurrentRound,
+  CalculateCurrentRoundTotal,
   GetCurrentRound,
   GetRounds,
   StartNewRound
@@ -43,6 +44,7 @@ export const App = (
     StartNewRound,
     GetCurrentRound,
     AddMeldToCurrentRound,
-    AddTrickToCurrentRound
+    AddTrickToCurrentRound,
+    CalculateCurrentRoundTotal
   }
 }
