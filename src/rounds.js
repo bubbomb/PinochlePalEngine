@@ -26,21 +26,20 @@ export const AddBidToCurrentRound = (playerId, amount) => {
   if (!('rounds' in store.currentGame)) {
     store.currentGame.rounds = [{}]
   }
-  let currentRound = store.currentGame.rounds[0]
+  let currentRound = GetCurrentRound()
 
   currentRound.bid = {
     player: playerId,
     team: GetTeamIdFromPlayerId(playerId),
     amount
   }
-  store.currentGame.rounds[0] = currentRound
 }
 
 export const AddMeldToCurrentRound = (teamId, amount) => {
   if (!('rounds' in store.currentGame)) {
     store.currentGame.rounds = [{}]
   }
-  let currentRound = store.currentGame.rounds[0]
+  let currentRound = GetCurrentRound()
 
   currentRound.melds = {
     ...currentRound.melds,
@@ -52,7 +51,7 @@ export const AddTrickToCurrentRound = (teamId, amount) => {
   if (!('rounds' in store.currentGame)) {
     store.currentGame.rounds = [{ tricks: {} }]
   }
-  let currentRound = store.currentGame.rounds[0]
+  let currentRound = GetCurrentRound()
   let teams = GetTeams()
   teams.forEach((team) => {
     if (team.id === teamId) {

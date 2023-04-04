@@ -20,7 +20,11 @@ import { store } from './store.js'
 
 export const App = (
   players = [],
-  currentGame = { teams: [], rounds: [], settings: {} }
+  currentGame = {
+    teams: [],
+    rounds: [],
+    settings: {}
+  }
 ) => {
   store.players = players
   store.currentGame = currentGame

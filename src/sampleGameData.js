@@ -60,13 +60,16 @@ const fourPlayerRound2 = {
   }
 }
 
-export const FourPlayerRounds = [fourPlayerRound1, fourPlayerRound2]
+export const FourPlayerRounds = [
+  { ...fourPlayerRound1 },
+  { ...fourPlayerRound2 }
+]
 
-export const fourPlayerStartedGame = {
-  players: AllPlayers,
+export const FourPlayerStartedGame = {
+  players: [...AllPlayers],
   currentGame: {
-    teams: FourPlayerTeams,
-    rounds: FourPlayerRounds,
-    settings: fourPlayerSettings
+    teams: [...FourPlayerTeams],
+    rounds: [...FourPlayerRounds],
+    settings: { ...fourPlayerSettings }
   }
 }
