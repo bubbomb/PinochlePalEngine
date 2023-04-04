@@ -2,12 +2,16 @@ export const Player1 = { id: '1playerid', name: 'Carol' }
 export const Player2 = { id: '2playerid', name: 'Derek' }
 export const Player3 = { id: '3playerid', name: 'Spencer' }
 export const Player4 = { id: '4playerid', name: 'Kristi' }
+export const Player5 = { id: '5playerid', name: 'Lena' }
+export const Player6 = { id: '6playerid', name: 'MJ' }
 
 export const AllPlayers = [
   { ...Player1 },
   { ...Player2 },
   { ...Player3 },
-  { ...Player4 }
+  { ...Player4 },
+  { ...Player5 },
+  { ...Player6 }
 ]
 
 export const FourPlayerTeam1 = {
@@ -78,3 +82,17 @@ export const FourPlayerStartedGame = {
     settings: { ...fourPlayerSettings }
   }
 }
+
+export const SixPlayerTeam1 = {
+  id: '1teamId6Player',
+  name: 'team1SixPlayer',
+  members: [Player1.id, Player2.id, Player3.id]
+}
+
+export const SixPlayerTeam2 = {
+  id: '2teamId6Player',
+  name: 'team2SixPlayer',
+  members: [Player4.id, Player5.id, Player6.id]
+}
+
+export const SixPlayerTeams = [SixPlayerTeam1, SixPlayerTeam2]

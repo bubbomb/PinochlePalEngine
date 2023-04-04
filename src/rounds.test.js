@@ -122,86 +122,80 @@ describe('round function tests', () => {
 
     expect(pinochlePal.GetRounds()).toEqual([expectedRound])
   })
+})
 
-  describe('calculate total', () => {
-    const round = {
-      bid: {
-        amount: 250,
-        player: Player1.id,
-        team: FourPlayerTeam1.id
-      },
-      melds: {
-        [FourPlayerTeam1.id]: 200,
-        [FourPlayerTeam2.id]: 100
-      },
-      tricks: {
-        [FourPlayerTeam1.id]: 170,
-        [FourPlayerTeam2.id]: 80
-      },
-      calculatedTotal: {}
+describe('4 player calculate total', () => {
+  const round = {
+    bid: {
+      amount: 250,
+      player: Player1.id,
+      team: FourPlayerTeam1.id
+    },
+    melds: {
+      [FourPlayerTeam1.id]: 200,
+      [FourPlayerTeam2.id]: 100
+    },
+    tricks: {
+      [FourPlayerTeam1.id]: 170,
+      [FourPlayerTeam2.id]: 80
+    },
+    calculatedTotal: {}
+  }
+
+  test('round exceeded bid', () => {
+    const pinochlePal = App([...AllPlayers], {
+      teams: [...FourPlayerTeams],
+      rounds: [{ ...round }]
+    })
+    pinochlePal.CalculateCurrentRoundTotal()
+
+    const expectedTotal = {
+      [FourPlayerTeam1.id]: 370,
+      [FourPlayerTeam2.id]: 180
     }
+    expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(expectedTotal)
+  })
 
-    test('round exceeded bid', () => {
-      const pinochlePal = App([...AllPlayers], {
-        teams: FourPlayerTeams,
-        rounds: [{ ...round }]
-      })
-      pinochlePal.CalculateCurrentRoundTotal()
-
-      const expectedTotal = {
-        [FourPlayerTeam1.id]: 370,
-        [FourPlayerTeam2.id]: 180
-      }
-      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
-        expectedTotal
-      )
-    })
-
-    test('round missed bid', () => {
-      const pinochlePal = App([...AllPlayers], {
-        teams: FourPlayerTeams,
-        rounds: [
-          {
-            ...round,
-            bid: {
-              amount: 250,
-              player: Player3.id,
-              team: FourPlayerTeam2.id
-            }
+  test('round missed bid', () => {
+    const pinochlePal = App([...AllPlayers], {
+      teams: FourPlayerTeams,
+      rounds: [
+        {
+          ...round,
+          bid: {
+            amount: 250,
+            player: Player3.id,
+            team: FourPlayerTeam2.id
           }
-        ]
-      })
-      pinochlePal.CalculateCurrentRoundTotal()
-      const expectedTotal = {
-        [FourPlayerTeam1.id]: 370,
-        [FourPlayerTeam2.id]: -250
-      }
-      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
-        expectedTotal
-      )
+        }
+      ]
     })
-    test('round no tricks', () => {
-      const pinochlePal = App([...AllPlayers], {
-        teams: FourPlayerTeams,
-        rounds: [
-          {
-            ...round,
-            tricks: {
-              [FourPlayerTeam1.id]: 170,
-              [FourPlayerTeam2.id]: 0
-            }
+    pinochlePal.CalculateCurrentRoundTotal()
+    const expectedTotal = {
+      [FourPlayerTeam1.id]: 370,
+      [FourPlayerTeam2.id]: -250
+    }
+    expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(expectedTotal)
+  })
+  test('round no tricks', () => {
+    const pinochlePal = App([...AllPlayers], {
+      teams: FourPlayerTeams,
+      rounds: [
+        {
+          ...round,
+          tricks: {
+            [FourPlayerTeam1.id]: 170,
+            [FourPlayerTeam2.id]: 0
           }
-        ]
-      })
-      pinochlePal.CalculateCurrentRoundTotal()
-      const expectedTotal = {
-        [FourPlayerTeam1.id]: 370,
-        [FourPlayerTeam2.id]: 0
-      }
-      expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(
-        expectedTotal
-      )
+        }
+      ]
     })
+    pinochlePal.CalculateCurrentRoundTotal()
+    const expectedTotal = {
+      [FourPlayerTeam1.id]: 370,
+      [FourPlayerTeam2.id]: 0
+    }
+    expect(pinochlePal.GetCurrentRound().calculatedTotal).toEqual(expectedTotal)
   })
 })
 

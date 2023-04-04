@@ -55,18 +55,30 @@ export const AddTrickToCurrentRound = (teamId, amount) => {
     store.currentGame.rounds = [{ tricks: {} }]
   }
   let currentRound = GetCurrentRound()
-  let teams = GetTeams()
+  const teams = GetTeams()
+  const totalTricks = getTotalTricks()
   teams.forEach((team) => {
     if (team.id === teamId) {
       currentRound.tricks[team.id] = amount
     } else {
-      currentRound.tricks[team.id] = 250 - amount
+      currentRound.tricks[team.id] = totalTricks - amount
     }
   })
 }
 
+const getTotalTricks = () => {
+  if (!('settings' in store.currentGame)) {
+    store.currentGame.settings = {}
+  }
+  return store.currentGame.settings.players === 6 ? 500 : 250
+}
+
 export const CalculateCurrentRoundTotal = () => {
   let currentRound = GetCurrentRound()
+  if (!('calculatedTotal' in currentRound)) {
+    currentRound.calculatedTotal = {}
+  }
+
   const teams = GetTeams()
   const bidTeam = currentRound.bid.team
   const bidAmount = currentRound.bid.amount
